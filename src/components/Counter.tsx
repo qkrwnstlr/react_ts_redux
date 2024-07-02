@@ -1,6 +1,9 @@
+import { ChangeEventHandler } from "react";
+
 type CounterProps = {
   title: string;
   count: number;
+  diff: number;
   onIncrease: () => void;
   onDecrease: () => void;
   onSetDiff: (diff: number) => void;
@@ -9,17 +12,27 @@ type CounterProps = {
 const Counter = ({
   title,
   count,
+  diff,
   onIncrease,
   onDecrease,
   onSetDiff,
-}: CounterProps) => (
-  <div>
-    <h1>{title}: {count}</h1>
-    <button onClick={onIncrease}>+1</button>
-    <button onClick={onDecrease}>-1</button>
-    <button onClick={() => onSetDiff(5)}>+5</button>
-  </div>
-);
+}: CounterProps) => {
+  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    // e.target.value 의 타입은 문자열이기 때문에 숫자로 변환해주어야 합니다.
+    onSetDiff(parseInt(e.target.value, 10));
+  };
+
+  return (
+    <div>
+      <h1>
+        {title}: {count}
+      </h1>
+      <input type="number" value={diff} min="1" onChange={onChange} />
+      <button onClick={onIncrease}>+</button>
+      <button onClick={onDecrease}>-</button>
+    </div>
+  );
+};
 
 Counter.defaultProps = {
   title: "Counter",
