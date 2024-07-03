@@ -1,7 +1,8 @@
+import React from "react";
 import { ChangeEventHandler } from "react";
 
 type CounterProps = {
-  title: string;
+  title?: string;
   count: number;
   diff: number;
   onIncrease: () => void;
@@ -10,7 +11,7 @@ type CounterProps = {
 };
 
 const Counter = ({
-  title,
+  title = "counter",
   count,
   diff,
   onIncrease,
@@ -34,8 +35,5 @@ const Counter = ({
   );
 };
 
-Counter.defaultProps = {
-  title: "Counter",
-};
 
-export default Counter;
+export default React.memo(Counter);
