@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CounterContainer from "./containers/CounterContainer";
+import CounterContainer from "./context/CounterContainer";
 
 const App: React.FC = () => {
   const [nextId, setNextId] = useState<number>(0);
