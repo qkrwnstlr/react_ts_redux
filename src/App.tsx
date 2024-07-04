@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CounterContainer from "./context/CounterContainer";
+import { CounterProvider } from "./context/counter";
 
 const App: React.FC = () => {
   const [nextId, setNextId] = useState<number>(0);
@@ -19,9 +20,11 @@ const App: React.FC = () => {
     <>
       <button onClick={addList}>add</button>
       <button onClick={removeList}>remove</button>
-      {list.map((value) => (
-        <CounterContainer key={value} />
-      ))}
+      <CounterProvider>
+        {list.map((value) => (
+          <CounterContainer key={value} />
+        ))}
+      </CounterProvider>
     </>
   );
 };
